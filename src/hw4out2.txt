@@ -1,0 +1,37 @@
+EnterBuyOrder 100000 Alice 100 20
+EnterBuyOrder 100001 Bob 100 15
+EnterBuyOrder 100002 Carol 105 10
+EnterSellOrder 100003 Dave 110 25
+EnterSellOrder 100004 Eve 105 5
+ExecuteBuySellOrders 105 5
+Buyer: Carol 5
+Seller: Eve 0
+EnterSellOrder 100005 Frank 100 30
+ExecuteBuySellOrders 102.5 5
+Buyer: Carol 0
+Seller: Frank 25
+ExecuteBuySellOrders 100 20
+Buyer: Alice 0
+Seller: Frank 5
+ExecuteBuySellOrders 100 5
+Buyer: Bob 10
+Seller: Frank 0
+DisplayHighestBuyOrder 100006 Bob 100001 100 10
+DisplayLowestSellOrder 100007 Dave 100003 110 25
+EnterSellOrder 100008 Grace 102 10
+EnterBuyOrder 100009 Heidi 110 40
+ExecuteBuySellOrders 106 10
+Buyer: Heidi 30
+Seller: Grace 0
+ExecuteBuySellOrders 110 25
+Buyer: Heidi 5
+Seller: Dave 0
+DisplayHighestBuyOrder 100010 Heidi 100009 110 5
+DisplayLowestSellOrder 100011 none
+EnterSellOrder 100012 Ivan 110 5
+ExecuteBuySellOrders 110 5
+Buyer: Heidi 0
+Seller: Ivan 0
+EnterSellOrder 100013 Judy 120 7
+DisplayHighestBuyOrder 100014 none
+DisplayLowestSellOrder 100015 Judy 100013 120 7
