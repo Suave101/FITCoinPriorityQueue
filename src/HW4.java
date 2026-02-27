@@ -42,6 +42,9 @@ public class HW4
         // The input file object that allows for access of the input file
         File inputFile = new File(file);
 
+        // Storing if the last line was an entry to see if we need to start the execution loop
+        boolean lastCommandWasEntry = false;
+
         // Try for safety
         try (Scanner fileScanner = new Scanner(inputFile)) {
             // Loop through each line of the file after the initial line
@@ -53,24 +56,72 @@ public class HW4
                 String[] commandAndArgs = line.split(" ");
 
                 // Print the command we are running
-                System.out.println(line);
+                System.out.print(line);
 
                 // Determine which method to run and run it
                 switch (commandAndArgs[0]) {
                     case "EnterBuyOrder":
+                        lastCommandWasEntry = true;
                         enterBuyOrder(Integer.parseInt(commandAndArgs[1]), commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Double.parseDouble(commandAndArgs[4]), buyerQueue);
                         break;
                     case "EnterSellOrder":
+                        lastCommandWasEntry = true;
                         enterSellOrder(Integer.parseInt(commandAndArgs[1]), commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Double.parseDouble(commandAndArgs[4]), sellerQueue);
                         break;
                     case "DisplayHighestBuyOrder":
-                        displayHighestBuyOrder(Integer.parseInt(commandAndArgs[1]));
+                        // If the last entry was an entry, we need to execute trades before we display the highest buy order
+                        if (lastCommandWasEntry) {
+                            executeTrades(sellerQueue, buyerQueue);
+                        }
+                        displayHighestBuyOrder(buyerQueue);
+                        lastCommandWasEntry = false;
                         break;
                     case "DisplayLowestSellOrder":
-                        displayLowestSellOrder(Integer.parseInt(commandAndArgs[1]));
+                        // If the last entry was an entry, we need to execute trades before we display the lowest sell order
+                        if (lastCommandWasEntry) {
+                            executeTrades(sellerQueue, buyerQueue);
+                        }
+                        displayLowestSellOrder(sellerQueue);
+                        lastCommandWasEntry = false;
                         break;
                     default:
                         throw new UnsupportedOperationException("The data is formatted wrong and the command " + commandAndArgs[0] + " does not exist!");
+                }
+
+                // New line after output
+                System.out.println();
+            }
+        }
+    }
+
+    /*
+     * Execute the trades until not possible
+     */
+    public static void executeTrades(PriorityQueue sellerQueue, PriorityQueue buyerQueue) {
+        // TODO: Implement printout for this method
+        // Ensure the PriorityQueues are of the correct type
+        if (!(sellerQueue.isType(SellOrder.class) && buyerQueue.isType(BuyOrder.class))) {
+            throw new IllegalStateException("Your sellerQueue and or buyerQueue are of the wrong type!");
+        }
+
+        while (buyerQueue.getRoot().getPrice() >= sellerQueue.getRoot().getPrice()) {
+            // Execute the trade and store
+            Order.zeroQuantity depletedOrders = Order.executeTrade((SellOrder) sellerQueue.getRoot(), (BuyOrder) buyerQueue.getRoot());
+
+            switch (depletedOrders) {
+                case BUY -> {
+                    buyerQueue.removeMin();
+                }
+                case SELL -> {
+                    sellerQueue.removeMin();
+                }
+                case BOTH -> {
+                    buyerQueue.removeMin();
+                    sellerQueue.removeMin();
+                }
+                case NEITHER -> {}
+                case null, default -> {
+                    throw new IllegalStateException("Depleted orders value must exist!");
                 }
             }
         }
@@ -95,11 +146,33 @@ public class HW4
     /*
      * Command Method to display the highest buy order
      */
-    public static void displayHighestBuyOrder(int time) {}
+    public static void displayHighestBuyOrder(PriorityQueue buyerQueue) {
+        // Ensure the PriorityQueue is of the correct type
+        if (!buyerQueue.isType(BuyOrder.class)) {
+            throw new IllegalStateException("Your buyerQueue is of the wrong type!");
+        }
+
+        // Get the highest buy order
+        BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
+
+        // Print it out
+        System.out.print(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + highestBuyOrder.getPrice() + " " + highestBuyOrder.getQuantity());
+    }
 
     /*
      * Command Method to display the lowest sell order
      */
-    public static void displayLowestSellOrder(int time) {}
+    public static void displayLowestSellOrder(PriorityQueue sellerQueue) {
+        // Ensure the PriorityQueues are of the correct type
+        if (!sellerQueue.isType(SellOrder.class)) {
+            throw new IllegalStateException("Your sellerQueue is of the wrong type!");
+        }
+
+        // Get the lowest sell order
+        SellOrder lowestSellOrder = (SellOrder) sellerQueue.getRoot();
+
+        // Print it out
+        System.out.print(" " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + lowestSellOrder.getPrice() + " " + lowestSellOrder.getQuantity());
+    }
 
 }
