@@ -97,6 +97,14 @@ public class PriorityQueue {
         priorityQueueStorage.set(index, upChild);
     }
 
+    public Order getRoot() {
+        if (!priorityQueueStorage.isEmpty()) {
+            return priorityQueueStorage.get(0);
+        } else {
+            return null;
+        }
+    }
+
     public Order removeMin() {
         // Check if the list is empty
         if (priorityQueueStorage.isEmpty()) {
