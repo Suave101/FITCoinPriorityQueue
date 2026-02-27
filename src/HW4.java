@@ -111,6 +111,9 @@ public class HW4 {
             throw new IllegalStateException("Your sellerQueue and or buyerQueue are of the wrong type!");
         }
 
+        // New line
+        System.out.println();
+
         while (buyerQueue.getRoot().getPrice() >= sellerQueue.getRoot().getPrice()) {
             // Execute the trade and store
             Order.zeroQuantity depletedOrders = Order.executeTrade((SellOrder) sellerQueue.getRoot(), (BuyOrder) buyerQueue.getRoot());
