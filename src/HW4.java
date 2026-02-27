@@ -121,7 +121,7 @@ public class HW4
                     break;
                 case NEITHER:
                     break;
-                case null, default:
+                default:
                     throw new IllegalStateException("Depleted orders value must exist!");
             }
         }
