@@ -18,7 +18,7 @@ public class BuyOrder extends Order {
     public boolean requiresSwap(Order parentOrder) {
         // Ensure correct type
         if (parentOrder instanceof SellOrder) {
-            throw new IllegalCallerException("You cannot swap a BuyOrder and a SellOrder!");
+            throw new IllegalStateException("You cannot swap a BuyOrder and a SellOrder!");
         }
 
         // For a max heap, if price higher, swap up
