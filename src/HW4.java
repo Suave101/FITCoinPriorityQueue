@@ -109,20 +109,20 @@ public class HW4
             Order.zeroQuantity depletedOrders = Order.executeTrade((SellOrder) sellerQueue.getRoot(), (BuyOrder) buyerQueue.getRoot());
 
             switch (depletedOrders) {
-                case BUY -> {
+                case BUY:
                     buyerQueue.removeMin();
-                }
-                case SELL -> {
+                    break;
+                case SELL:
                     sellerQueue.removeMin();
-                }
-                case BOTH -> {
+                    break;
+                case BOTH:
                     buyerQueue.removeMin();
                     sellerQueue.removeMin();
-                }
-                case NEITHER -> {}
-                case null, default -> {
+                    break;
+                case NEITHER:
+                    break;
+                case null, default:
                     throw new IllegalStateException("Depleted orders value must exist!");
-                }
             }
         }
     }
