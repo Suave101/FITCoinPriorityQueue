@@ -11,15 +11,23 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.RoundingMode;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
-public class HW4
-{
+public class HW4 {
+
+    // Decimal Format for Price
+    private static final DecimalFormat fmtPrice = new DecimalFormat("0.##");
+    private static final DecimalFormat fmtQuantity = new DecimalFormat("0.################");
 
     /*
      * Main method to parse the input and generate an output
      */
     public static void main(String[] args) throws FileNotFoundException {
+        // Ensure rounding is correct
+        fmtPrice.setRoundingMode(RoundingMode.HALF_UP);
+
         // The two queues that we are working with
         PriorityQueue sellerQueue = new PriorityQueue(SellOrder.class);
         PriorityQueue buyerQueue = new PriorityQueue(BuyOrder.class);
@@ -98,7 +106,6 @@ public class HW4
      * Execute the trades until not possible
      */
     public static void executeTrades(PriorityQueue sellerQueue, PriorityQueue buyerQueue) {
-        // TODO: Implement printout for this method
         // Ensure the PriorityQueues are of the correct type
         if (!(sellerQueue.isType(SellOrder.class) && buyerQueue.isType(BuyOrder.class))) {
             throw new IllegalStateException("Your sellerQueue and or buyerQueue are of the wrong type!");
@@ -156,7 +163,7 @@ public class HW4
         BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
 
         // Print it out
-        System.out.print(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + highestBuyOrder.getPrice() + " " + highestBuyOrder.getQuantity());
+        System.out.print(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + fmtPrice.format(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
     }
 
     /*
