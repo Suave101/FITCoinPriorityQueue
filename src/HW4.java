@@ -11,22 +11,13 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.math.RoundingMode;
 import java.util.Scanner;
-import java.text.DecimalFormat;
 
 public class HW4 {
-
-    // Decimal Format for Price
-    private static final DecimalFormat fmtPrice = new DecimalFormat("0.##");
-    private static final DecimalFormat fmtQuantity = new DecimalFormat("0.################");
-
     /*
      * Main method to parse the input and generate an output
      */
     public static void main(String[] args) throws FileNotFoundException {
-        // Ensure rounding is correct
-        fmtPrice.setRoundingMode(RoundingMode.HALF_UP);
 
         // The two queues that we are working with
         PriorityQueue sellerQueue = new PriorityQueue(SellOrder.class);
@@ -50,9 +41,6 @@ public class HW4 {
         // The input file object that allows for access of the input file
         File inputFile = new File(file);
 
-        // Storing if the last line was an entry to see if we need to start the execution loop
-        boolean lastCommandWasEntry = false;
-
         // Try for safety
         try (Scanner fileScanner = new Scanner(inputFile)) {
             // Loop through each line of the file after the initial line
@@ -69,28 +57,18 @@ public class HW4 {
                 // Determine which method to run and run it
                 switch (commandAndArgs[0]) {
                     case "EnterBuyOrder":
-                        lastCommandWasEntry = true;
-                        enterBuyOrder(Integer.parseInt(commandAndArgs[1]), commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Double.parseDouble(commandAndArgs[4]), buyerQueue);
+                        enterBuyOrder(Integer.parseInt(commandAndArgs[1]), commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), buyerQueue);
                         break;
                     case "EnterSellOrder":
-                        lastCommandWasEntry = true;
-                        enterSellOrder(Integer.parseInt(commandAndArgs[1]), commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Double.parseDouble(commandAndArgs[4]), sellerQueue);
+                        enterSellOrder(Integer.parseInt(commandAndArgs[1]), commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), sellerQueue);
                         break;
                     case "DisplayHighestBuyOrder":
-                        // If the last entry was an entry, we need to execute trades before we display the highest buy order
-                        if (lastCommandWasEntry) {
-                            executeTrades(sellerQueue, buyerQueue);
-                        }
+                        executeTrades(sellerQueue, buyerQueue);
                         displayHighestBuyOrder(buyerQueue);
-                        lastCommandWasEntry = false;
                         break;
                     case "DisplayLowestSellOrder":
-                        // If the last entry was an entry, we need to execute trades before we display the lowest sell order
-                        if (lastCommandWasEntry) {
-                            executeTrades(sellerQueue, buyerQueue);
-                        }
+                        executeTrades(sellerQueue, buyerQueue);
                         displayLowestSellOrder(sellerQueue);
-                        lastCommandWasEntry = false;
                         break;
                     default:
                         throw new UnsupportedOperationException("The data is formatted wrong and the command " + commandAndArgs[0] + " does not exist!");
@@ -140,7 +118,7 @@ public class HW4 {
     /*
      * Command Method to enter a buy order
      */
-    public static void enterBuyOrder(int time, String name, double price, double quantity, PriorityQueue buyerQueue) {
+    public static void enterBuyOrder(int time, String name, double price, int quantity, PriorityQueue buyerQueue) {
         BuyOrder newOrder = new BuyOrder(time, name, price, quantity);
         buyerQueue.insert(newOrder);
     }
@@ -148,7 +126,7 @@ public class HW4 {
     /*
      * Command Method to enter a sell order
      */
-    public static void enterSellOrder(int time, String name, double price, double quantity, PriorityQueue sellerQueue) {
+    public static void enterSellOrder(int time, String name, double price, int quantity, PriorityQueue sellerQueue) {
         SellOrder newOrder = new SellOrder(time, name, price, quantity);
         sellerQueue.insert(newOrder);
     }
@@ -166,7 +144,7 @@ public class HW4 {
         BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
 
         // Print it out
-        System.out.print(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + fmtPrice.format(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
+        System.out.print(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + Math.round(100 * highestBuyOrder.getPrice()) / 100 + " " + highestBuyOrder.getQuantity());
     }
 
     /*

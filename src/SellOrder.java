@@ -10,7 +10,7 @@
  */
 
 public class SellOrder extends Order {
-    public SellOrder(int time, String name, double price, double quantity) {
+    public SellOrder(int time, String name, double price, int quantity) {
         super(time, name, price, quantity);
     }
 

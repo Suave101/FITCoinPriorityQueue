@@ -12,12 +12,12 @@ public abstract class Order {
     private int time;
     private String name;
     private double price;
-    private double quantity;
+    private int quantity;
 
     /*
      * A constructor for an order
      */
-    public Order(int time, String name, double price, double quantity) {
+    public Order(int time, String name, double price, int quantity) {
         this.time = time;
         this.name = name;
         this.price = price;
@@ -32,7 +32,7 @@ public abstract class Order {
     /*
      * Getter method for getting the quantity
      */
-    public double getQuantity() {
+    public int getQuantity() {
         return this.quantity;
     }
 
@@ -60,7 +60,7 @@ public abstract class Order {
     /*
      * Safe trade quantity changer
      */
-    public boolean tradeWithQuantity(double tradeQuantity) {
+    public boolean tradeWithQuantity(int tradeQuantity) {
         if (tradeQuantity > this.quantity) {
             throw new IllegalArgumentException("You only have " + this.quantity + " coins. You tried to trade "
                     + tradeQuantity + " coins. You cannot trade more coins than you have!");
@@ -90,7 +90,7 @@ public abstract class Order {
         }
 
         // Determine trade quantity
-        double tradeQuantity = Math.min(buyOrder.getQuantity(), sellOrder.getQuantity());
+        int tradeQuantity = Math.min(buyOrder.getQuantity(), sellOrder.getQuantity());
 
         // Execute the reduction in quantity
         boolean sellFinished = sellOrder.tradeWithQuantity(tradeQuantity);
