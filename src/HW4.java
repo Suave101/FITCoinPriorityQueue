@@ -11,9 +11,11 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class HW4 {
+    private static DecimalFormat priceFormat = new DecimalFormat("0.##");
     /*
      * Main method to parse the input and generate an output
      */
@@ -144,7 +146,7 @@ public class HW4 {
         BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
 
         // Print it out
-        System.out.print(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + Math.round(100 * highestBuyOrder.getPrice()) / 100 + " " + highestBuyOrder.getQuantity());
+        System.out.print(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
     }
 
     /*
@@ -160,7 +162,14 @@ public class HW4 {
         SellOrder lowestSellOrder = (SellOrder) sellerQueue.getRoot();
 
         // Print it out
-        System.out.print(" " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + lowestSellOrder.getPrice() + " " + lowestSellOrder.getQuantity());
+        System.out.print(" " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
+    }
+
+    /*
+     * Formats price into correct string format
+     */
+    public static String formatPrice(double price) {
+        return priceFormat.format(Math.round(100 * price) / 100);
     }
 
 }
