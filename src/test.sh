@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # 1. Compile all Java files
+echo "Sanity Version Check: A"
+echo ""
+
 echo "Compiling..."
 javac *.java
 
