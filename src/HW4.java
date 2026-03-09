@@ -59,17 +59,19 @@ public class HW4 {
                 // Determine which method to run and run it
                 switch (commandAndArgs[0]) {
                     case "EnterBuyOrder":
-                        enterBuyOrder(Integer.parseInt(commandAndArgs[1]), commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), buyerQueue);
+                        enterBuyOrder(commandAndArgs[1], commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), buyerQueue);
                         break;
                     case "EnterSellOrder":
-                        enterSellOrder(Integer.parseInt(commandAndArgs[1]), commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), sellerQueue);
+                        enterSellOrder(commandAndArgs[1], commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), sellerQueue);
                         break;
                     case "DisplayHighestBuyOrder":
                         executeTrades(sellerQueue, buyerQueue);
+                        System.out.println();
                         displayHighestBuyOrder(buyerQueue);
                         break;
                     case "DisplayLowestSellOrder":
                         executeTrades(sellerQueue, buyerQueue);
+                        System.out.println();
                         displayLowestSellOrder(sellerQueue);
                         break;
                     default:
@@ -90,9 +92,6 @@ public class HW4 {
         if (!(sellerQueue.isType(SellOrder.class) && buyerQueue.isType(BuyOrder.class))) {
             throw new IllegalStateException("Your sellerQueue and or buyerQueue are of the wrong type!");
         }
-
-        // New line
-        System.out.println();
 
         // Check for empty queue
         if (!(buyerQueue.hasRoot() && sellerQueue.hasRoot())) {
@@ -130,7 +129,7 @@ public class HW4 {
     /*
      * Command Method to enter a buy order
      */
-    public static void enterBuyOrder(int time, String name, double price, int quantity, PriorityQueue buyerQueue) {
+    public static void enterBuyOrder(String time, String name, double price, int quantity, PriorityQueue buyerQueue) {
         BuyOrder newOrder = new BuyOrder(time, name, price, quantity);
         buyerQueue.insert(newOrder);
     }
@@ -138,7 +137,7 @@ public class HW4 {
     /*
      * Command Method to enter a sell order
      */
-    public static void enterSellOrder(int time, String name, double price, int quantity, PriorityQueue sellerQueue) {
+    public static void enterSellOrder(String time, String name, double price, int quantity, PriorityQueue sellerQueue) {
         SellOrder newOrder = new SellOrder(time, name, price, quantity);
         sellerQueue.insert(newOrder);
     }

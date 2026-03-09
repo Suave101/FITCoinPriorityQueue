@@ -9,7 +9,7 @@
  */
 
 public abstract class Order {
-    private int time;
+    private String time;
     private String name;
     private double price;
     private int quantity;
@@ -17,7 +17,7 @@ public abstract class Order {
     /*
      * A constructor for an order
      */
-    public Order(int time, String name, double price, int quantity) {
+    public Order(String time, String name, double price, int quantity) {
         this.time = time;
         this.name = name;
         this.price = price;
@@ -46,7 +46,7 @@ public abstract class Order {
     /*
      * Getter method for getting the time
      */
-    public int getTime() {
+    public String getTime() {
         return this.time;
     }
 

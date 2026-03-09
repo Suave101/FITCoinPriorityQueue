@@ -10,7 +10,7 @@
  */
 
 public class SellOrder extends Order {
-    public SellOrder(int time, String name, double price, int quantity) {
+    public SellOrder(String time, String name, double price, int quantity) {
         super(time, name, price, quantity);
     }
 
@@ -28,7 +28,7 @@ public class SellOrder extends Order {
 
         // If prices equal, swap by time
         if (this.getPrice() == parentOrder.getPrice()) {
-            return this.getTime() < parentOrder.getTime();
+            return Integer.parseInt(this.getTime()) < Integer.parseInt(parentOrder.getTime());
         }
 
         //If price higher, stay below parent
