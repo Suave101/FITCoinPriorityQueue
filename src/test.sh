@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# 1. Compile all Java files
-echo "Sanity Version Check: A"
+# 0. Pull from GitHub for most recent version
+git pull
 echo ""
+
+# 1. Compile all Java files
 
 echo "Compiling..."
 javac *.java
