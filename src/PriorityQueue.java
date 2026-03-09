@@ -61,6 +61,10 @@ public class PriorityQueue {
         return priorityQueueStorage.size() > getChildIndex(index, child);
     }
 
+    public boolean hasRoot() {
+        return priorityQueueStorage.size() > 0;
+    }
+
     public enum Child {
         LEFT,
         RIGHT

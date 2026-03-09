@@ -94,6 +94,11 @@ public class HW4 {
         // New line
         System.out.println();
 
+        // Check for empty queue
+        if (!(buyerQueue.hasRoot() && sellerQueue.hasRoot())) {
+            return;
+        }
+
         while (buyerQueue.getRoot().getPrice() >= sellerQueue.getRoot().getPrice()) {
             // Execute the trade and store
             Order.zeroQuantity depletedOrders = Order.executeTrade((SellOrder) sellerQueue.getRoot(), (BuyOrder) buyerQueue.getRoot());
@@ -113,6 +118,11 @@ public class HW4 {
                     break;
                 default:
                     throw new IllegalStateException("Depleted orders value must exist!");
+            }
+
+            // Check if the queue is empty on next iteration
+            if (!(buyerQueue.hasRoot() && sellerQueue.hasRoot())) {
+                break;
             }
         }
     }
