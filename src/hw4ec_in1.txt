@@ -1,0 +1,13 @@
+EnterBuyOrder 090000 Alice 100 10
+EnterBuyOrder 090100 Bob 105 10
+EnterBuyOrder 090200 Carol 90 10
+EnterSellOrder 090300 Dave 130 10
+EnterSellOrder 090400 Eve 120 10
+EnterSellOrder 090500 Frank 110 10
+ChangeBuyOrder 090530 Carol 110 10
+DisplayHighestBuyOrder 090600
+DisplayLowestSellOrder 090601
+ChangeBuyOrder 090605 Bob 90 10
+EnterSellOrder 090700 Grace 105 10
+CancelBuyOrder 090730 Bob
+EnterSellOrder 090800 Heidi 100 10

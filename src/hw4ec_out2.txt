@@ -1,0 +1,48 @@
+EnterSellOrder 093030 Eve 140 4
+EnterSellOrder 094040 Frank 109 30
+EnterBuyOrder 100000 Alice 100 20
+EnterBuyOrder 100001 Bob 106 15
+EnterBuyOrder 100002 Carol 40 2
+EnterBuyOrder 100003 Dan 103 8
+EnterSellOrder 100004 Dave 108 25
+ChangeSellOrder 100005 Dave 110 25
+ChangeBuyOrder 100008 Carol 105 10
+ChangeBuyOrder 100009 Bob 100 15
+ChangeSellOrder 100015 Eve 105 5
+ExecuteBuySellOrders 105 5
+Buyer: Carol 5
+Seller: Eve 0
+ChangeSellOrder 100016 Frank 100 30
+ExecuteBuySellOrders 102.50 5
+Buyer: Carol 0
+Seller: Frank 25
+ExecuteBuySellOrders 101.50 8
+Buyer: Dan 0
+Seller: Frank 17
+ExecuteBuySellOrders 100 17
+Buyer: Alice 3
+Seller: Frank 0
+DisplayHighestBuyOrder 100017 Alice 100000 100 3
+DisplayLowestSellOrder 100018 Dave 100005 110 25
+EnterSellOrder 100019 Grace 102 10
+EnterSellOrder 100020 Judy 120 7
+EnterBuyOrder 100031 Heidi 110 40
+ExecuteBuySellOrders 106 10
+Buyer: Heidi 30
+Seller: Grace 0
+ExecuteBuySellOrders 110 25
+Buyer: Heidi 5
+Seller: Dave 0
+DisplayHighestBuyOrder 100032 Heidi 100031 110 5
+DisplayLowestSellOrder 100033 Judy 100020 120 7
+CancelBuyOrder 100035 Bob
+EnterSellOrder 100037 Ivan 100 50
+ExecuteBuySellOrders 105 5
+Buyer: Heidi 0
+Seller: Ivan 45
+ExecuteBuySellOrders 100 3
+Buyer: Alice 0
+Seller: Ivan 42
+DisplayHighestBuyOrder 100045 none
+DisplayLowestSellOrder 100046 Ivan 100037 100 42
+CancelSellOrder 110000 Ivan
