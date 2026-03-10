@@ -1,0 +1,9 @@
+EnterBuyOrder 090000 A 10 20
+EnterBuyOrder 090100 B 50 20
+EnterBuyOrder 090200 C 30 20
+EnterBuyOrder 090300 D 90 20
+EnterBuyOrder 090400 E 70 20
+EnterSellOrder 090500 F 80 5
+DisplayHighestBuyOrder 090600
+EnterSellOrder 090700 G 70 25
+DisplayHighestBuyOrder 090800
