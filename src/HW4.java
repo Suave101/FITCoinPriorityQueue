@@ -53,25 +53,20 @@ public class HW4 {
                 // Split the string into its command and args
                 String[] commandAndArgs = line.split(" ");
 
-                // Print the command we are running
-                System.out.print(line);
-
                 // Determine which method to run and run it
                 switch (commandAndArgs[0]) {
                     case "EnterBuyOrder":
                         enterBuyOrder(commandAndArgs[1], commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), buyerQueue);
+                        executeTrades(sellerQueue, buyerQueue);
                         break;
                     case "EnterSellOrder":
                         enterSellOrder(commandAndArgs[1], commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), sellerQueue);
+                        executeTrades(sellerQueue, buyerQueue);
                         break;
                     case "DisplayHighestBuyOrder":
-                        executeTrades(sellerQueue, buyerQueue);
-                        System.out.println();
                         displayHighestBuyOrder(buyerQueue);
                         break;
                     case "DisplayLowestSellOrder":
-                        executeTrades(sellerQueue, buyerQueue);
-                        System.out.println();
                         displayLowestSellOrder(sellerQueue);
                         break;
                     default:
@@ -130,6 +125,7 @@ public class HW4 {
      * Command Method to enter a buy order
      */
     public static void enterBuyOrder(String time, String name, double price, int quantity, PriorityQueue buyerQueue) {
+        System.out.println("EnterBuyOrder " + time + " " + name + " " + priceFormat.format(price) + " " + quantity);
         BuyOrder newOrder = new BuyOrder(time, name, price, quantity);
         buyerQueue.insert(newOrder);
     }
@@ -138,6 +134,7 @@ public class HW4 {
      * Command Method to enter a sell order
      */
     public static void enterSellOrder(String time, String name, double price, int quantity, PriorityQueue sellerQueue) {
+        System.out.println("EnterSellOrder " + time + " " + name + " " + priceFormat.format(price) + " " + quantity);
         SellOrder newOrder = new SellOrder(time, name, price, quantity);
         sellerQueue.insert(newOrder);
     }
