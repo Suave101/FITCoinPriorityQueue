@@ -81,16 +81,15 @@ public abstract class Order {
      * A static method to execute a trade order
      */
     public static zeroQuantity executeTrade(SellOrder sellOrder, BuyOrder buyOrder) {
-        // Guard Case
-        if (buyOrder.getPrice() < sellOrder.getPrice()) {
-            throw new IllegalStateException("Market Violation: Buyer price is lower than the seller price!");
-        }
-
         // Calculate sale price
-        double salePrice = buyOrder.getPrice(); // If they are equal it does not matter
+        double salePrice;
+
         if (buyOrder.getPrice() < sellOrder.getPrice()) {
             // In the unlikely case that the buy order has a higher price, the orders are executed at the average
             salePrice = (buyOrder.getPrice() + sellOrder.getPrice()) / 2.0;
+        } else {
+            // Else the price is the same and we just use buy order price
+            salePrice = buyOrder.getPrice();
         }
 
         // Determine trade quantity
@@ -101,7 +100,7 @@ public abstract class Order {
         boolean buyFinished = buyOrder.tradeWithQuantity(tradeQuantity);
 
         // Print the output strings
-        System.out.println("ExecuteBuySellOrders " + priceFormat.format(salePrice) + " " + tradeQuantity);
+        System.out.println("ExecuteBuySellOrders " + Math.round(salePrice) + " " + tradeQuantity);
         System.out.println("Buyer: " + buyOrder.getName() + " " + buyOrder.getQuantity());
         System.out.println("Seller: " + sellOrder.getName() + " " + sellOrder.getQuantity());
 
