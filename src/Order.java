@@ -100,7 +100,7 @@ public abstract class Order {
         boolean buyFinished = buyOrder.tradeWithQuantity(tradeQuantity);
 
         // Print the output strings
-        System.out.println("ExecuteBuySellOrders " + Math.round(salePrice) + " " + tradeQuantity);
+        System.out.println("ExecuteBuySellOrders " + salePrice + " " + tradeQuantity);
         System.out.println("Buyer: " + buyOrder.getName() + " " + buyOrder.getQuantity());
         System.out.println("Seller: " + sellOrder.getName() + " " + sellOrder.getQuantity());
 
