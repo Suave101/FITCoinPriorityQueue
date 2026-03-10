@@ -72,9 +72,6 @@ public class HW4 {
                     default:
                         throw new UnsupportedOperationException("The data is formatted wrong and the command " + commandAndArgs[0] + " does not exist!");
                 }
-
-                // New line after output
-                System.out.println();
             }
         }
     }
@@ -152,7 +149,7 @@ public class HW4 {
         BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
 
         // Print it out
-        System.out.print(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
+        System.out.println(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
     }
 
     /*
@@ -168,7 +165,7 @@ public class HW4 {
         SellOrder lowestSellOrder = (SellOrder) sellerQueue.getRoot();
 
         // Print it out
-        System.out.print(" " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
+        System.out.println(" " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
     }
 
     /*
