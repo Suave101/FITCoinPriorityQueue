@@ -8,11 +8,15 @@
 
  */
 
+import java.text.DecimalFormat;
+
 public abstract class Order {
     private String time;
     private String name;
     private double price;
     private int quantity;
+
+    private static DecimalFormat priceFormat = new DecimalFormat("0.##");
 
     /*
      * A constructor for an order
@@ -97,7 +101,7 @@ public abstract class Order {
         boolean buyFinished = buyOrder.tradeWithQuantity(tradeQuantity);
 
         // Print the output strings
-        System.out.println("ExecuteBuySellOrders " + salePrice + " " + tradeQuantity);
+        System.out.println("ExecuteBuySellOrders " + priceFormat.format(salePrice) + " " + tradeQuantity);
         System.out.println("Buyer: " + buyOrder.getName() + " " + buyOrder.getQuantity());
         System.out.println("Seller: " + sellOrder.getName() + " " + sellOrder.getQuantity());
 
