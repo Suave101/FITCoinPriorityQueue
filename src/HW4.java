@@ -175,7 +175,7 @@ public class HW4 {
             System.out.println("DisplayLowestBuyOrder " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
         } else {
             // Print it out
-            System.out.println("DisplayLowestBuyOrder none");
+            System.out.println("DisplayLowestSellOrder none");
         }
     }
 
