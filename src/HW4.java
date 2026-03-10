@@ -152,9 +152,9 @@ public class HW4 {
             BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
 
             // Print it out
-            System.out.println("DisplayHighestBuyOrder " + time + " "+ highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
+            System.out.println("DisplayHighestBuyOrder " + time + " " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
         } else {
-            System.out.println("DisplayHighestBuyOrder none");
+            System.out.println("DisplayHighestBuyOrder " + time + " none");
         }
     }
 
@@ -175,7 +175,7 @@ public class HW4 {
             System.out.println("DisplayLowestSellOrder " + time + " " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
         } else {
             // Print it out
-            System.out.println("DisplayLowestSellOrder none");
+            System.out.println("DisplayLowestSellOrder " + time + " none");
         }
     }
 
