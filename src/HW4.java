@@ -172,7 +172,7 @@ public class HW4 {
             SellOrder lowestSellOrder = (SellOrder) sellerQueue.getRoot();
 
             // Print it out
-            System.out.println("DisplayLowestBuyOrder " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
+            System.out.println("DisplayLowestSellOrder " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
         } else {
             // Print it out
             System.out.println("DisplayLowestSellOrder none");
