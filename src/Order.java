@@ -84,12 +84,12 @@ public abstract class Order {
         // Calculate sale price
         double salePrice;
 
-        if (buyOrder.getPrice() < sellOrder.getPrice()) {
-            // In the unlikely case that the buy order has a higher price, the orders are executed at the average
-            salePrice = (buyOrder.getPrice() + sellOrder.getPrice()) / 2.0;
-        } else {
-            // Else the price is the same and we just use buy order price
+        if (buyOrder.getPrice() == sellOrder.getPrice()) {
+            // If the price is the same, and we just use buy order price
             salePrice = buyOrder.getPrice();
+        } else {
+            // In the unlikely case that the buy order has a higher price, the orders are executed at the average
+            salePrice = ((buyOrder.getPrice() + sellOrder.getPrice()) / 2.0);
         }
 
         // Determine trade quantity
@@ -100,7 +100,13 @@ public abstract class Order {
         boolean buyFinished = buyOrder.tradeWithQuantity(tradeQuantity);
 
         // Print the output strings
-        System.out.println("ExecuteBuySellOrders " + salePrice + " " + tradeQuantity);
+        if (salePrice == (long) salePrice) {
+            // Case 110.0 -> "110"
+            System.out.printf("ExecuteBuySellOrders %d %d%n", (long) salePrice, tradeQuantity);
+        } else {
+            // Case: 102.5 -> "102.50"
+            System.out.printf("ExecuteBuySellOrders %.2f %d%n", salePrice, tradeQuantity);
+        }
         System.out.println("Buyer: " + buyOrder.getName() + " " + buyOrder.getQuantity());
         System.out.println("Seller: " + sellOrder.getName() + " " + sellOrder.getQuantity());
 
