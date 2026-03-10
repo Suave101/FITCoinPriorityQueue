@@ -1,0 +1,5 @@
+EnterSellOrder 090000 Alice 100 20
+EnterBuyOrder 090100 Bob 105 20
+ExecuteBuySellOrders 102.50 20
+Buyer: Bob 0
+Seller: Alice 0
