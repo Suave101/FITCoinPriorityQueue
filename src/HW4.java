@@ -64,10 +64,10 @@ public class HW4 {
                         executeTrades(sellerQueue, buyerQueue);
                         break;
                     case "DisplayHighestBuyOrder":
-                        displayHighestBuyOrder(buyerQueue);
+                        displayHighestBuyOrder(commandAndArgs[1], buyerQueue);
                         break;
                     case "DisplayLowestSellOrder":
-                        displayLowestSellOrder(sellerQueue);
+                        displayLowestSellOrder(commandAndArgs[1], sellerQueue);
                         break;
                     default:
                         throw new UnsupportedOperationException("The data is formatted wrong and the command " + commandAndArgs[0] + " does not exist!");
@@ -139,7 +139,7 @@ public class HW4 {
     /*
      * Command Method to display the highest buy order
      */
-    public static void displayHighestBuyOrder(PriorityQueue buyerQueue) {
+    public static void displayHighestBuyOrder(String time, PriorityQueue buyerQueue) {
         // Ensure the PriorityQueue is of the correct type
         if (!buyerQueue.isType(BuyOrder.class)) {
             throw new IllegalStateException("Your buyerQueue is of the wrong type!");
@@ -152,7 +152,7 @@ public class HW4 {
             BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
 
             // Print it out
-            System.out.println("DisplayHighestBuyOrder " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
+            System.out.println("DisplayHighestBuyOrder " + time + " "+ highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
         } else {
             System.out.println("DisplayHighestBuyOrder none");
         }
@@ -161,7 +161,7 @@ public class HW4 {
     /*
      * Command Method to display the lowest sell order
      */
-    public static void displayLowestSellOrder(PriorityQueue sellerQueue) {
+    public static void displayLowestSellOrder(String time, PriorityQueue sellerQueue) {
         // Ensure the PriorityQueues are of the correct type
         if (!sellerQueue.isType(SellOrder.class)) {
             throw new IllegalStateException("Your sellerQueue is of the wrong type!");
@@ -172,7 +172,7 @@ public class HW4 {
             SellOrder lowestSellOrder = (SellOrder) sellerQueue.getRoot();
 
             // Print it out
-            System.out.println("DisplayLowestSellOrder " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
+            System.out.println("DisplayLowestSellOrder " + time + " " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
         } else {
             // Print it out
             System.out.println("DisplayLowestSellOrder none");
