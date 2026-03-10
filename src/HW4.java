@@ -145,11 +145,17 @@ public class HW4 {
             throw new IllegalStateException("Your buyerQueue is of the wrong type!");
         }
 
-        // Get the highest buy order
-        BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
 
-        // Print it out
-        System.out.println(" " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
+
+        if (buyerQueue.hasRoot()) {
+            // Get the highest buy order
+            BuyOrder highestBuyOrder = (BuyOrder) buyerQueue.getRoot();
+
+            // Print it out
+            System.out.println("DisplayHighestBuyOrder " + highestBuyOrder.getName() + " " + highestBuyOrder.getTime() + " " + formatPrice(highestBuyOrder.getPrice()) + " " + highestBuyOrder.getQuantity());
+        } else {
+            System.out.println("DisplayHighestBuyOrder none");
+        }
     }
 
     /*
@@ -161,11 +167,16 @@ public class HW4 {
             throw new IllegalStateException("Your sellerQueue is of the wrong type!");
         }
 
-        // Get the lowest sell order
-        SellOrder lowestSellOrder = (SellOrder) sellerQueue.getRoot();
+        if (sellerQueue.hasRoot()) {
+            // Get the lowest sell order
+            SellOrder lowestSellOrder = (SellOrder) sellerQueue.getRoot();
 
-        // Print it out
-        System.out.println(" " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
+            // Print it out
+            System.out.println("DisplayLowestBuyOrder " + lowestSellOrder.getName() + " " + lowestSellOrder.getTime() + " " + formatPrice(lowestSellOrder.getPrice()) + " " + lowestSellOrder.getQuantity());
+        } else {
+            // Print it out
+            System.out.println("DisplayLowestBuyOrder none");
+        }
     }
 
     /*
