@@ -1,0 +1,22 @@
+EnterBuyOrder 080000 Alice 100 10
+EnterBuyOrder 080100 Bob 100 5
+EnterBuyOrder 080200 Carol 95 8
+DisplayHighestBuyOrder 080300 Alice 080000 100 10
+EnterSellOrder 080400 Dave 105 7
+DisplayLowestSellOrder 080500 Dave 080400 105 7
+EnterSellOrder 080600 Eve 100 6
+ExecuteBuySellOrders 100 6
+Buyer: Alice 4
+Seller: Eve 0
+EnterSellOrder 080700 Frank 90 20
+ExecuteBuySellOrders 95 4
+Buyer: Alice 0
+Seller: Frank 16
+ExecuteBuySellOrders 95 5
+Buyer: Bob 0
+Seller: Frank 11
+ExecuteBuySellOrders 92.50 8
+Buyer: Carol 0
+Seller: Frank 3
+DisplayHighestBuyOrder 080800 none
+DisplayLowestSellOrder 080900 Dave 080400 105 7
