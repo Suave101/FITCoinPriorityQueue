@@ -82,11 +82,11 @@ public class HW4Extra {
                         executeTrades(sellerQueue, buyerQueue);
                         break;
                     case "CancelBuyOrder":
-                        cancelOrder(commandAndArgs[1], commandAndArgs[2], buyerMap);
+                        cancelOrder(commandAndArgs[1], commandAndArgs[2], buyerMap, "Buy");
                         executeTrades(sellerQueue, buyerQueue);
                         break;
                     case "CancelSellOrder":
-                        cancelOrder(commandAndArgs[1], commandAndArgs[2], sellerMap);
+                        cancelOrder(commandAndArgs[1], commandAndArgs[2], sellerMap, "Sell");
                         executeTrades(sellerQueue, buyerQueue);
                         break;
                     default:
@@ -99,11 +99,11 @@ public class HW4Extra {
     /*
      * Cancels an order
      */
-    public static void cancelOrder(String time, String name, GoatedHashMap map) {
+    public static void cancelOrder(String time, String name, GoatedHashMap map, String type) {
         // Check if person exists
         Order oldOrder = map.getOrderByName(name);
         if (oldOrder == null) {
-            System.out.println("CancelBuyOrder " + time + " " + name + " noBuyerError");
+            System.out.println("Cancel" + type + "Order " + time + " " + name + " noBuyerError");
         } else {
             // Cancel the order
             oldOrder.cancel();
@@ -116,7 +116,7 @@ public class HW4Extra {
             }
 
             // Print success
-            System.out.println("CancelBuyOrder " + time + " " + name);
+            System.out.println("Cancel" + type + "Order " + time + " " + name);
         }
     }
 
