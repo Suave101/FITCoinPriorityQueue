@@ -183,7 +183,7 @@ public class HW4 {
      * Formats price into correct string format
      */
     public static String formatPrice(double price) {
-        return priceFormat.format(Math.round(100 * price) / 100);
+        return priceFormat.format(Math.round(100.0 * price) / 100.0);
     }
 
 }
