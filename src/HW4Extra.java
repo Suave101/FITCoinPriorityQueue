@@ -9,6 +9,25 @@
 
  */
 
+/*
+    Writeup:
+    Question 1:
+        By implementing a custom HashMap (GoatedHashMap), we achieve
+        O(1) time complexity for looking up a buyer or seller's
+        order that already exists by their name. Without this map.
+        we would have to iteratively scan the entire priority queue
+        array to find the user's old order which takes O(N) time.
+    Question 2:
+        Instead of manually finding and deleting the old order from
+        the heap, (which would require shifting elements in an array
+        , taking O(N) time), we use a cancel method on the order such
+        that when an order is canceled it takes O(1) time and during
+        any operation that requires to get or remove the root, we clean
+        the heap of any canceled orders at the root taking O(log(N))
+        time for each canceled order. This avoids the trivial O(N)
+        shifting process.
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
