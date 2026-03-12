@@ -62,6 +62,7 @@ public class PriorityQueue {
     }
 
     public boolean hasRoot() {
+        clean();
         return priorityQueueStorage.size() > 0;
     }
 
@@ -102,6 +103,7 @@ public class PriorityQueue {
     }
 
     public Order getRoot() {
+        clean();
         if (!priorityQueueStorage.isEmpty()) {
             return priorityQueueStorage.get(0);
         } else {
@@ -141,6 +143,37 @@ public class PriorityQueue {
         }
 
         return output;
+    }
+
+    public void clean() {
+        // Check if the list is empty
+        if (priorityQueueStorage.isEmpty()) {
+            return;
+        }
+
+        // Check if the heap is size 1
+        if (priorityQueueStorage.size() == 1) {
+            // If the order is canceled remove it
+            if (priorityQueueStorage.get(0).isCanceled()) {
+                priorityQueueStorage.remove(0);
+                return;
+            }
+        }
+
+        // Save the root node value
+        Order root = priorityQueueStorage.get(0);
+
+        // If canceled
+        if (root.isCanceled()) {
+            // Remove the root node and replace it with the last node
+            priorityQueueStorage.set(0, priorityQueueStorage.remove(priorityQueueStorage.size() - 1));
+
+            // Swap down until Priority Queue conditions are met
+            downHeap(0);
+
+            // Recurse clean
+            clean();
+        }
     }
 
     public void downHeap(int index) {
