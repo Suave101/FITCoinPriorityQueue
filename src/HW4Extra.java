@@ -75,14 +75,48 @@ public class HW4Extra {
                         break;
                     case "ChangeBuyOrder":
                         changeBuyOrder(commandAndArgs[1], commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), buyerQueue, buyerMap);
+                        executeTrades(sellerQueue, buyerQueue);
                         break;
                     case "ChangeSellOrder":
                         changeSellOrder(commandAndArgs[1], commandAndArgs[2], Double.parseDouble(commandAndArgs[3]), Integer.parseInt(commandAndArgs[4]), sellerQueue, sellerMap);
+                        executeTrades(sellerQueue, buyerQueue);
+                        break;
+                    case "CancelBuyOrder":
+                        cancelOrder(commandAndArgs[1], commandAndArgs[2], buyerMap);
+                        executeTrades(sellerQueue, buyerQueue);
+                        break;
+                    case "CancelSellOrder":
+                        cancelOrder(commandAndArgs[1], commandAndArgs[2], sellerMap);
+                        executeTrades(sellerQueue, buyerQueue);
                         break;
                     default:
                         throw new UnsupportedOperationException("The data is formatted wrong and the command " + commandAndArgs[0] + " does not exist!");
                 }
             }
+        }
+    }
+
+    /*
+     * Cancels an order
+     */
+    public static void cancelOrder(String time, String name, GoatedHashMap map) {
+        // Check if person exists
+        Order oldOrder = map.getOrderByName(name);
+        if (oldOrder == null) {
+            System.out.println("CancelBuyOrder " + time + " " + name + " noBuyerError");
+        } else {
+            // Cancel the order
+            oldOrder.cancel();
+
+            // Remove the user from your custom HashMap
+            try {
+                map.removeOrderByName(name);
+            } catch (Exception e) {
+                // Ignore, we already know they exist
+            }
+
+            // Print success
+            System.out.println("CancelBuyOrder " + time + " " + name);
         }
     }
 
@@ -101,7 +135,7 @@ public class HW4Extra {
             oldOrder.cancel();
 
             // Create a new order
-            BuyOrder newOrder = new BuyOrder(time, name, price, quantity);
+            SellOrder newOrder = new SellOrder(time, name, price, quantity);
 
             // Add it to the map
             sellerMap.addOrder(newOrder);
