@@ -117,7 +117,13 @@ public class PriorityQueue {
 
         // Check if the heap is size 1
         if (priorityQueueStorage.size() == 1) {
-            return priorityQueueStorage.remove(0);
+            // If the order is canceled don't return it
+            if (priorityQueueStorage.get(0).isCanceled()) {
+                priorityQueueStorage.remove(0);
+                return null;
+            } else {
+                return priorityQueueStorage.remove(0);
+            }
         }
 
         // Save the root node value for return
@@ -128,6 +134,11 @@ public class PriorityQueue {
 
         // Swap down until Priority Queue conditions are met
         downHeap(0);
+
+        // If the order was canceled, repeat removeMin
+        if (output.isCanceled()) {
+            return removeMin();
+        }
 
         return output;
     }

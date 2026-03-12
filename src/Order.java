@@ -9,12 +9,14 @@
  */
 
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 public abstract class Order {
     private String time;
     private String name;
     private double price;
     private int quantity;
+    private boolean canceled = false;
 
     private static DecimalFormat priceFormat = new DecimalFormat("0.##");
 
@@ -59,6 +61,20 @@ public abstract class Order {
      */
     public String getName() {
         return this.name;
+    }
+
+    /*
+     * Getter method for canceled
+     */
+    public boolean isCanceled() {
+        return canceled;
+    }
+
+    /*
+     * Setter method for canceled
+     */
+    public void cancel() {
+        this.canceled = true;
     }
 
     /*
