@@ -20,7 +20,7 @@ for i in 1 2; do
     echo "Running Test Case $i..."
     echo "---------------------------"
 
-    java HW4 hw4ec_in${i}.txt > my_output$i.txt
+    java HW4Extra hw4ec_in${i}.txt > my_output$i.txt
 
     # Compare the output with the expected output
     diff my_output$i.txt hw4ec_out$i.txt > diff_result_ec.txt
